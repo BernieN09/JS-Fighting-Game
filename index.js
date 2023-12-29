@@ -24,6 +24,7 @@ class Sprite{
     this.lastkey;
     this.color = color;
     this.isAttacking;
+    this.health = 100;
 
     this.attackBox = {
       position: {
@@ -40,7 +41,7 @@ class Sprite{
     c.fillStyle = this.color;
       c.fillRect(this.position.x, this.position.y, this.width, this.height);
       
-    //attack box
+     //attack box
     if (this.isAttacking){
       c.fillStyle = "white";
       c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
@@ -128,6 +129,7 @@ const keys = {
   }
 }
 
+// helper function for calculating if attack landed successfully
 function rectangularCollision({rectangle1, rectangle2}) {
   return (
     rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
@@ -162,13 +164,14 @@ function animate(){
     enemy.velocity.x = 5;
   }
 
-  //console.log(player.position.x, '=', player.attackBox.position.x - 50,);
+  // detect for collision
   if (rectangularCollision({
     rectangle1: player,
     rectangle2: enemy
   }) && player.isAttacking){
     player.isAttacking = false;
-    console.log('go');
+    enemy.health -= 20;
+    document.querySelector('#enemyHealth').style.width = enemy.health + '%';
   }
 
   if (rectangularCollision({
@@ -176,7 +179,8 @@ function animate(){
     rectangle2: player
   }) && enemy.isAttacking){
     enemy.isAttacking = false;
-    console.log('enemy attack works');
+    player.health -= 20;
+    document.querySelector('#playerHealth').style.width = player.health + '%';
   }
 }
 
