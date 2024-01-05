@@ -19,7 +19,9 @@
             </div>
 
             <!-- Timer -->
-            <div style="background-color: red; width: 7rem; height: 7rem; flex-shrink: 0;"></div>
+            <div id="timer" style="background-color: red; width: 7rem; height: 7rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; ">
+                10
+            </div>
 
             <!-- Enemy Health -->
             <div style="position: relative; height: 48px; width: 100%;">
@@ -28,6 +30,7 @@
                 </div>
             </div>
         </div>
+        <div id="gameResult" style="position: absolute; color: white; align-items: center; justify-content: center; top:0; right:0; bottom: 0; left:0; display: none">Tie</div>
         <!-- Canvas -->
         <canvas></canvas>
     </div>

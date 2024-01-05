@@ -139,6 +139,41 @@ function rectangularCollision({rectangle1, rectangle2}) {
   )
 }
 
+//
+function determineWinner ({player, enemy, timerId}) {
+  clearTimeout(timerId);
+  document.querySelector('#gameResult').style.display = 'flex';
+  if (player.health === enemy.health) {
+    document.querySelector('#gameResult').innerHTML = 'Tie';
+  }
+  else if (player.health > enemy.health) {
+    document.querySelector('#gameResult').innerHTML = 'Player 1 wins';
+  }
+  else if (player.health < enemy.health) {
+    document.querySelector('#gameResult').innerHTML = 'Player 2 wins'
+  }
+}
+
+// function that decrements the html timer using an infinite loop
+let timer = 60;
+let timerId;
+function decreaseTimer() {
+  if (timer > 0){
+    timerId = setTimeout(decreaseTimer, 1000, timerId);
+    timer --;
+    document.querySelector('#timer').innerHTML = timer;
+  }
+
+  //determine who won by who has the most health
+  
+  if (timer === 0) {
+    determineWinner({player, enemy});
+  }
+}
+
+decreaseTimer()
+
+//animation loop that calls itself and updates: the background, sprite movement & interactions, health bar
 function animate(){
   window.requestAnimationFrame(animate);
   c.fillStyle = 'black';
@@ -181,6 +216,11 @@ function animate(){
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector('#playerHealth').style.width = player.health + '%';
+  }
+
+  // Ending the game based on health
+  if (enemy.health <= 0 || player.health <= 0){
+    determineWinner({player, enemy, timerId})
   }
 }
 
