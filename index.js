@@ -24,6 +24,16 @@ const background = new Sprite({
   imageSrc: './img/resizedbackground.png'
 }); 
 
+const crow = new Sprite({
+  position: {
+    x: 200,
+    y: canvas.height - 150
+  },
+  imageSrc: './img/Crow.png',
+  scale: 2,
+  framesMax: 4
+}); 
+
 // instantiate the player sprite
 const player = new Fighter({
   position: {
@@ -84,6 +94,7 @@ function animate(){
   c.fillRect(0,0, canvas.width, canvas.height);
 
   background.update();
+  crow.update();
   player.update();
   enemy.update();
 
