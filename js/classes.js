@@ -7,10 +7,10 @@ class Sprite{
     this.image = new Image();
     this.image.src = imageSrc;
     this.scale = scale;
-    this.framesMax = framesMax
-    this.framesCurrent = 0;
-    this.framesElapsed = 0;
-    this.framesHold = 10;
+    this.framesMax = framesMax  // total number of frames there are (6 different shop frames -> frameMax of 6)
+    this.framesCurrent = 0;     // allows looping through each of the animation frames
+    this.framesElapsed = 0;     // counter variable to check if the frame rate desired is occuring
+    this.framesHold = 20;       // how the amount the counter variable is checked against 
   }
   
   draw() {
@@ -19,18 +19,17 @@ class Sprite{
       this.framesCurrent * (this.image.width / this.framesMax),
       0,
       this.image.width / this.framesMax,
-      this.image.height / this.framesMax,
+      this.image.height,
       this.position.x,
       this.position.y,
       (this.image.width / this.framesMax) * this.scale,
-      (this.image.height / this.framesMax) * this.scale);
+      this.image.height * this.scale);
   }
   
   //updates our sprite; redraws them; applies gravity; allows left/right movement
   update() {
     this.draw();
     this.framesElapsed++
-
     if(this.framesElapsed % this.framesHold === 0) {
       if (this.framesCurrent < this.framesMax - 1) {
         this.framesCurrent++

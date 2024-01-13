@@ -21,17 +21,17 @@ const background = new Sprite({
     x: 0,
     y: 0
   },
-  imageSrc: './img/resizedbackground.png'
+  imageSrc: './img/redcavebackground.png'
 }); 
 
 const crow = new Sprite({
   position: {
-    x: 200,
-    y: canvas.height - 150
+    x: 30,
+    y: canvas.height - 320
   },
   imageSrc: './img/Crow.png',
   scale: 2,
-  framesMax: 4
+  framesMax: 26
 }); 
 
 // instantiate the player sprite
